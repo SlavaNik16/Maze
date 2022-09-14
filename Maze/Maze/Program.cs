@@ -7,45 +7,50 @@ namespace Maze
     {
         static void Main()
         {
-            Console.WriteLine("Введите start или end (чтобы начать игру или завершить соответственно):)");
+            //maze1 = 20 * 20
+            //maze2 = 60 * 60
+            Console.WriteLine("Псевдо игра: Лабиринт\nЦель игры: Дойти до конца! \nЛабиринт:\n1. 20 * 20  - Нуб даже пройдет\n2. 60 * 60 - Придется не легко\n3. 100 * 100 - Даже Уик не справится\n4. 160 * 60\nВыберите уровень сложности: ");
             var otvet = Console.ReadLine();
-            bool run = false;
-            if (otvet == "start")
-            {
-                run = true;
-            }
-            else if (otvet == "end")
-            {
-                run = false;
-            }
+
             int i = 0;
             int j = 0;
-            int n = 21;
+
             var wall = '█';
             var player = '☺';
             var end = '⌂';
 
-            string[] str = File.ReadAllLines("maze1.txt");//Читаю файл с лабиринтом и присваиваю одномерному масиву str
-            int[,] map = new int[str.Length, str[0].Split(' ').Length];//Создаю двумерный массив с длиной равной n = 21;
+            try
+            {
+              string[] nenushno = File.ReadAllLines($"maze{otvet}.txt");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine("Пожалуйста введите число по уровню!!!");
+                Environment.Exit(0);    
+            }
+
+            string[] str = File.ReadAllLines($"maze{otvet}.txt");//Читаю файл с лабиринтом и присваиваю одномерному масиву str
+            string[] str2;
+            int[,] map = new int[str.Length, str[0].Split(' ').Length];//Создаю двумерный массив
             //[0,0][0,1][0,2] и так далее, по столбцам
             for (i = 0; i < str.Length; i++)
             {
-                string[] str2 = str[i].Split(' '); //тут же создаем массив по символьно
+                str2 = str[i].Split(' '); //тут же создаем массив по символьно
                 for (j = 0; j < str2.Length; j++) 
-                    map[i, j] = int.Parse(str2[j]); //Преобразуем из строки в int32 и присваиваем двумерному массиву
+                    map[i, j] = Int32.Parse(str2[j]); //Преобразуем из строки в int32 и присваиваем двумерному массиву
             }
 
             ConsoleKeyInfo key;
             Console.CursorVisible = false;
-            int x = 2;
+            int x = 0;
             int y = 0;
             int indexX = -1;
             int indexY = -1;
             int playerX = -1;
             int playerY = -1;
-            for (i = 0; i < n; i++)
+            for (i = 0; i < str.Length; i++)
             {
-                for (j = 0; j < n; j++)
+                for (j = 0; j < str.Length; j++)
                 {
                     if (map[i, j] == 3)
                     {
@@ -72,10 +77,10 @@ namespace Maze
                 Console.WriteLine();
             }
             
-         Console.SetCursorPosition(x+=playerX,y+=playerY);
-
+         //Console.SetCursorPosition(x+=2+playerX,y+=playerY);
+         Console.SetCursorPosition(x+=1+playerX,y+=8+playerY);
            
-        while (run)
+        while (true)
             {      
                 key = Console.ReadKey(true);
                 if (key.KeyChar == 119 || key.KeyChar == 87)
@@ -128,13 +133,28 @@ namespace Maze
                   
                 if ((indexX == playerX)&&(indexY == playerY))
                 {
-                    run = false;
+                    break;
                 }
                 Console.SetCursorPosition(x, y);
             }
             Console.SetCursorPosition(x, y+=2);
             Console.WriteLine();
-            Console.WriteLine("Поздравляю! Вы прошли обучение. Желаете перейти на новый уровень(Улитка): ");
+            if (otvet == "1")
+            {
+                Console.WriteLine("Поздравляю! Вы прошли обучение!");
+            }
+            else if(otvet == "2")
+            {
+                Console.WriteLine("Поздравляю! Вы прошли средний уровень!");
+            }
+            else if (otvet == "3")
+            {
+                Console.WriteLine("Поздравляю! Вы прошли HARD уровень! Вы сейчас потратили кучу времени на эту игру!");
+            }
+            else if (otvet == "4")
+            {
+                Console.WriteLine("Поздравляю! Вы прошли HARD-Dop уровень! Вы сейчас потратили кучу времени на эту игру!");
+            }
         }
     }
 }
