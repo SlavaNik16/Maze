@@ -257,16 +257,7 @@ namespace Maze
                             {
                                 indexX = i;
                                 indexY = j;
-                                if (map_tum[i, j] != 1 && otvet !="4")
-                                {
-                                    Console.Write(end);
-                                    
-                                }
-                                else
-                                {
-                                    Console.Write(' ');
-                                }
-                                
+                                Console.Write(end);
                             }
                             else if (map[i, j] == 2)
                             {
