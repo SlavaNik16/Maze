@@ -17,12 +17,14 @@ namespace Maze
             int n = 0,n1 = 0;
             var wall = '█';
             var player = '☺';
+            
+            
             var end = '⌂';
             var start = '☼';        
             var poskaska = false;
             var exit = false;
             int count = 0;
-
+            
 
             try
             {
@@ -82,7 +84,9 @@ namespace Maze
                 for (j = 0; j < str.Length; j++)
                 {
                     if (map[i,j] == 2){
-                        Console.WriteLine(player);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(player);
+                        Console.ForegroundColor = ConsoleColor.White;
                         playerX = i;
                         playerY = j;
                     }
@@ -102,7 +106,9 @@ namespace Maze
                         
                         Console.Write(' ');
                         Console.SetCursorPosition(x, --y);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(player);
+                        Console.ForegroundColor = ConsoleColor.White;
                         count++;
 
                         if (!poskaska)
@@ -129,7 +135,9 @@ namespace Maze
 
                         Console.Write(' ');
                         Console.SetCursorPosition(x, ++y);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(player);
+                        Console.ForegroundColor = ConsoleColor.White;
                         count++;
                         if (!poskaska)
                         {
@@ -154,7 +162,9 @@ namespace Maze
                     {
                         Console.Write(' ');
                         Console.SetCursorPosition(--x,y);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(player);
+                        Console.ForegroundColor = ConsoleColor.White;
                         count++;
                         if (!poskaska)
                         {
@@ -179,7 +189,9 @@ namespace Maze
                     {
                         Console.Write(' ');
                         Console.SetCursorPosition(++x, y);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(player);
+                        Console.ForegroundColor = ConsoleColor.White;
                         count++;
                         if (!poskaska)
                         {
@@ -206,11 +218,15 @@ namespace Maze
                         {
                             if (map_pos[i, j] == 3)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write(end);
+                                Console.ForegroundColor = ConsoleColor.White;
                             }
                             else if (map_pos[i, j] == 2)
                             {
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write(player);
+                                Console.ForegroundColor = ConsoleColor.White;
                             }
                             else if (map_pos[i, j] == 1)
                             {
@@ -257,7 +273,18 @@ namespace Maze
                             {
                                 indexX = i;
                                 indexY = j;
-                                Console.Write(end);
+                                if (map_tum[i, j] != 1 && otvet !="4")
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write(end);
+                                    Console.ForegroundColor = ConsoleColor.White;
+
+                                }
+                                else
+                                {
+                                    Console.Write(' ');
+                                }
+                                
                             }
                             else if (map[i, j] == 2)
                             {
@@ -300,7 +327,9 @@ namespace Maze
                         Console.WriteLine();
                     }
                     Console.SetCursorPosition(x, y);
-                    Console.WriteLine(player);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(player);
+                    Console.ForegroundColor = ConsoleColor.White;
                     if (otvet == "4") otvet = "-1";
                 }
 
